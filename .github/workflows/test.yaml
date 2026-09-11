@@ -19,13 +19,13 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
-      # 3. Azure Login - Hard Coded Service Principal
+      # 3. Azure Login
       - name: Azure Login
         uses: azure/login@v2
         with:
           creds: |
             {
-              "clientId": "de73c7ea-b550-4746-8010-221113c74a7a",
+             "clientId": "de73c7ea-b550-4746-8010-221113c74a7a",
               "clientSecret": "hSo8Q~ncFgxrwl~-bazJVHmwRewIHaeNjRbb1bqC",
               "tenantId": "8968e7c0-454e-4762-8227-5070cecb405c",
               "subscriptionId": "20f0748e-1dfc-4085-9be6-07b106f015ed"
@@ -33,21 +33,31 @@ jobs:
 
       # 4. Verify Azure Login
       - name: Check Azure Login
-        run: |
-          az account show
+        run: az account show
 
-      # 5. Terraform Init
+      # 5. Check Terraform Files
+      - name: Check Terraform Files
+        working-directory: ./resource_group
+        run: |
+          pwd
+          ls -la
+
+      # 6. Terraform Init
       - name: Terraform Init
+        working-directory: ./resource_group
         run: terraform init
-workingDirectory: '$(System.DefaultWorkingDirectory)/terraform
-      # 6. Terraform Validate
+
+      # 7. Terraform Validate
       - name: Terraform Validate
+        working-directory: ./resource_group
         run: terraform validate
-workingDirectory: '$(System.DefaultWorkingDirectory)/terraform
-      # 7. Terraform Plan
+
+      # 8. Terraform Plan
       - name: Terraform Plan
+        working-directory: ./resource_group
         run: terraform plan
-workingDirectory: '$(System.DefaultWorkingDirectory)/terraform
-      # 8. Terraform Apply
+
+      # 9. Terraform Apply
       # - name: Terraform Apply
+      #   working-directory: ./resource_group
       #   run: terraform apply -auto-approve

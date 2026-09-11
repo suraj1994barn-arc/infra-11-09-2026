@@ -39,15 +39,15 @@ jobs:
       # 5. Terraform Init
       - name: Terraform Init
         run: terraform init
-
+workingDirectory: '$(System.DefaultWorkingDirectory)/terraform
       # 6. Terraform Validate
       - name: Terraform Validate
         run: terraform validate
-
+workingDirectory: '$(System.DefaultWorkingDirectory)/terraform
       # 7. Terraform Plan
       - name: Terraform Plan
         run: terraform plan
-
+workingDirectory: '$(System.DefaultWorkingDirectory)/terraform
       # 8. Terraform Apply
       # - name: Terraform Apply
       #   run: terraform apply -auto-approve

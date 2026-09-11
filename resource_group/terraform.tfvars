@@ -25,4 +25,8 @@ rg_name = {
     name       = "rg_raman"
     location   = "westus"
   }
+  rg4 = {
+    name       = "rg_ravan"
+    location   = "westus"
+  }
 }

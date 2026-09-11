@@ -1,4 +1,3 @@
-
 name: Terraform Azure Pipeline
 
 on:
@@ -20,8 +19,8 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
-      # 3. Azure Login using Service Principal
-      - name: Azure Login with Service Principal
+      # 3. Azure Login - Hard Coded Service Principal
+      - name: Azure Login
         uses: azure/login@v2
         with:
           creds: |
@@ -32,9 +31,10 @@ jobs:
               "subscriptionId": "20f0748e-1dfc-4085-9be6-07b106f015ed"
             }
 
-      # 4. Check Azure Login
+      # 4. Verify Azure Login
       - name: Check Azure Login
-        run: az account show
+        run: |
+          az account show
 
       # 5. Terraform Init
       - name: Terraform Init
@@ -47,7 +47,7 @@ jobs:
       # 7. Terraform Plan
       - name: Terraform Plan
         run: terraform plan
-        
-       # 8. Terraform Apply
+
+      # 8. Terraform Apply
       # - name: Terraform Apply
       #   run: terraform apply -auto-approve

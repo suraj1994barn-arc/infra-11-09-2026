@@ -21,4 +21,8 @@ rg_name = {
       height     = "6.0"
     }
   }
+  rg3 = {
+    name       = "rg_raman"
+    location   = "westus"
+  }
 }
